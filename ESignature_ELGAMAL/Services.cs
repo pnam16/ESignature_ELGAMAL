@@ -4,14 +4,14 @@ using System.Text;
 
 namespace ESignature_ELGAMAL
 {
-    class Services
+    public class Services
     {
-        public ulong getRandom()
+        public ulong GetRandom()
         {
             Random rnd = new Random();
-            return rnd.Next(3000);
+            return (ulong)rnd.Next(30000);
         }
-        public bool kiemtraSNT(ulong param) //kiểm tra số nguyên tố
+        public bool KiemtraSNT(ulong param) //kiểm tra số nguyên tố
         {
             if (param < 2)
                 return false;
@@ -50,33 +50,23 @@ namespace ESignature_ELGAMAL
                 return false;
         } // check GCD(a,b) = 1
 
-        public ulong LuyThuaModulo(ulong CoSo, ulong SoMu, ulong soModulo)
+        public ulong LuyThuaModulo(ulong coSo, ulong soMu, ulong soModulo)
         {
-
-            //Sử dụng thuật toán "bình phương nhân"
-            //Chuyển SoMu sang hệ nhị phân
-            ulong[] a = new ulong[100];
-            ulong k = 0;
-            do
+            ulong ketqua = 1, n = soModulo, x = coSo;
+            String k = Convert.ToString((int)soMu, 2);//chuyen sang nhi phan
+            int i = 0;
+            while (i < k.Length)
             {
-                a[k] = SoMu % 2;
-
-                k++;
-                SoMu /= 2;
+                ketqua *= ketqua;
+                ketqua %= n;
+                if (k[i] == '1')
+                {
+                    ketqua *= x;
+                }
+                ketqua %= n;
+                i++;
             }
-            while (SoMu != 0);
-
-            //Quá trình lấy dư
-            ulong kq = 1;
-
-            for (ulong i = k - 1; i >= 0; i--)
-            {
-                kq = (kq * kq) % soModulo;
-                if (a[i] == 1)
-                    kq = (kq * CoSo) % soModulo;
-            }
-
-            return kq;
+            return ketqua;
         }
 
         public ulong NghichDaoModulo(ulong temp, ulong modulo)
@@ -118,5 +108,18 @@ namespace ESignature_ELGAMAL
             else
                 return true;
         } //kiem tra so duoc sinh ra
+
+        public ulong TinhD(ulong a, ulong x, ulong p)
+        {
+            ulong result = 1;
+
+            for (ulong i = 0; i <= x; i++)
+                result *= NghichDaoModulo(a, p);
+
+            return result;
+        }
+
+     
+
     }
 }
