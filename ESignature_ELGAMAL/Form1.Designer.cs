@@ -44,6 +44,7 @@ namespace ESignature_ELGAMAL
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.btnBrowerSigned = new System.Windows.Forms.Button();
             this.btnBrowerUnsign = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
@@ -65,7 +66,8 @@ namespace ESignature_ELGAMAL
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.openFileDialogToSign = new System.Windows.Forms.OpenFileDialog();
-            this.label14 = new System.Windows.Forms.Label();
+            this.openFileDialogToCheck = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             tab1 = new System.Windows.Forms.TabPage();
             tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -83,7 +85,7 @@ namespace ESignature_ELGAMAL
             tab1.Location = new System.Drawing.Point(4, 29);
             tab1.Name = "tab1";
             tab1.Padding = new System.Windows.Forms.Padding(3);
-            tab1.Size = new System.Drawing.Size(1297, 684);
+            tab1.Size = new System.Drawing.Size(1295, 692);
             tab1.TabIndex = 0;
             tab1.Text = "Chữ kí số elgamal";
             tab1.UseVisualStyleBackColor = true;
@@ -125,8 +127,8 @@ namespace ESignature_ELGAMAL
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.splitContainer1.Size = new System.Drawing.Size(1291, 678);
-            this.splitContainer1.SplitterDistance = 429;
+            this.splitContainer1.Size = new System.Drawing.Size(1289, 686);
+            this.splitContainer1.SplitterDistance = 428;
             this.splitContainer1.TabIndex = 0;
             // 
             // label10
@@ -151,7 +153,7 @@ namespace ESignature_ELGAMAL
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.groupBox2.BackColor = System.Drawing.Color.MintCream;
             this.groupBox2.Controls.Add(this.txtX);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -165,7 +167,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtX
             // 
-            this.txtX.Enabled = false;
             this.txtX.Location = new System.Drawing.Point(241, 50);
             this.txtX.Name = "txtX";
             this.txtX.Size = new System.Drawing.Size(125, 30);
@@ -182,7 +183,7 @@ namespace ESignature_ELGAMAL
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.groupBox1.BackColor = System.Drawing.Color.MintCream;
             this.groupBox1.Controls.Add(this.txtD);
             this.groupBox1.Controls.Add(this.txtA);
             this.groupBox1.Controls.Add(this.txtP);
@@ -200,7 +201,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtD
             // 
-            this.txtD.Enabled = false;
             this.txtD.Location = new System.Drawing.Point(240, 115);
             this.txtD.Name = "txtD";
             this.txtD.Size = new System.Drawing.Size(125, 30);
@@ -208,7 +208,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtA
             // 
-            this.txtA.Enabled = false;
             this.txtA.Location = new System.Drawing.Point(241, 74);
             this.txtA.Name = "txtA";
             this.txtA.Size = new System.Drawing.Size(125, 30);
@@ -216,7 +215,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtP
             // 
-            this.txtP.Enabled = false;
             this.txtP.Location = new System.Drawing.Point(241, 35);
             this.txtP.Name = "txtP";
             this.txtP.Size = new System.Drawing.Size(125, 30);
@@ -234,7 +232,7 @@ namespace ESignature_ELGAMAL
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(106, 77);
+            this.label4.Location = new System.Drawing.Point(111, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 23);
             this.label4.TabIndex = 1;
@@ -243,31 +241,43 @@ namespace ESignature_ELGAMAL
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(83, 42);
+            this.label3.Location = new System.Drawing.Point(0, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 23);
+            this.label3.Size = new System.Drawing.Size(242, 23);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Số nguyên tố p =";
+            this.label3.Text = "Số nguyên tố ngẫu nhiên p =";
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Location = new System.Drawing.Point(13, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(423, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tạo khoá";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.ForeColor = System.Drawing.Color.Gray;
+            this.label14.Location = new System.Drawing.Point(385, 33);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(131, 20);
+            this.label14.TabIndex = 20;
+            this.label14.Text = "Khóa công khai";
+            // 
             // btnBrowerSigned
             // 
             this.btnBrowerSigned.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBrowerSigned.Location = new System.Drawing.Point(535, 542);
+            this.btnBrowerSigned.Location = new System.Drawing.Point(535, 546);
             this.btnBrowerSigned.Name = "btnBrowerSigned";
             this.btnBrowerSigned.Size = new System.Drawing.Size(82, 51);
             this.btnBrowerSigned.TabIndex = 19;
             this.btnBrowerSigned.Text = "Chọn tệp";
             this.btnBrowerSigned.UseVisualStyleBackColor = true;
+            this.btnBrowerSigned.Click += new System.EventHandler(this.BtnBrowerSigned_Click);
             // 
             // btnBrowerUnsign
             // 
@@ -289,11 +299,12 @@ namespace ESignature_ELGAMAL
             this.btnCheck.TabIndex = 16;
             this.btnCheck.Text = "Kiểm tra chữ ký";
             this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
             // 
             // txtPathSingned
             // 
             this.txtPathSingned.Enabled = false;
-            this.txtPathSingned.Location = new System.Drawing.Point(78, 542);
+            this.txtPathSingned.Location = new System.Drawing.Point(78, 545);
             this.txtPathSingned.MaximumSize = new System.Drawing.Size(451, 50);
             this.txtPathSingned.MinimumSize = new System.Drawing.Size(451, 50);
             this.txtPathSingned.Multiline = true;
@@ -334,7 +345,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtShow
             // 
-            this.txtShow.Enabled = false;
             this.txtShow.Location = new System.Drawing.Point(78, 246);
             this.txtShow.Multiline = true;
             this.txtShow.Name = "txtShow";
@@ -383,7 +393,6 @@ namespace ESignature_ELGAMAL
             // 
             // txtY
             // 
-            this.txtY.Enabled = false;
             this.txtY.Location = new System.Drawing.Point(567, 49);
             this.txtY.Name = "txtY";
             this.txtY.Size = new System.Drawing.Size(121, 27);
@@ -395,13 +404,12 @@ namespace ESignature_ELGAMAL
             this.label7.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label7.Location = new System.Drawing.Point(385, 53);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(176, 20);
+            this.label7.Size = new System.Drawing.Size(173, 20);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Y = (a ^ k mod p) Y =";
+            this.label7.Text = "y = (a ^ k mod p) y =";
             // 
             // txtK
             // 
-            this.txtK.Enabled = false;
             this.txtK.Location = new System.Drawing.Point(231, 49);
             this.txtK.Name = "txtK";
             this.txtK.Size = new System.Drawing.Size(121, 27);
@@ -433,10 +441,10 @@ namespace ESignature_ELGAMAL
             this.tabControl1.Controls.Add(tab1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 8);
+            this.tabControl1.Location = new System.Drawing.Point(0, -2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1305, 717);
+            this.tabControl1.Size = new System.Drawing.Size(1303, 725);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage2
@@ -444,7 +452,7 @@ namespace ESignature_ELGAMAL
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1297, 684);
+            this.tabPage2.Size = new System.Drawing.Size(1295, 692);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Thông tin tác giả";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -454,7 +462,7 @@ namespace ESignature_ELGAMAL
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1297, 684);
+            this.tabPage1.Size = new System.Drawing.Size(1295, 692);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Hướng dẫn sử dụng";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -463,16 +471,9 @@ namespace ESignature_ELGAMAL
             // 
             this.openFileDialogToSign.FileName = "openFileDialog1";
             // 
-            // label14
+            // openFileDialogToCheck
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.ForeColor = System.Drawing.Color.Gray;
-            this.label14.Location = new System.Drawing.Point(385, 33);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(131, 20);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "Khóa công khai";
+            this.openFileDialogToCheck.FileName = "openFileDialog2";
             // 
             // Form1
             // 
@@ -543,5 +544,9 @@ namespace ESignature_ELGAMAL
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.TextBox txtPathSingned;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.OpenFileDialog openFileDialogToCheck;
+        private System.Windows.Forms.OpenFileDialog openFileDial2;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
