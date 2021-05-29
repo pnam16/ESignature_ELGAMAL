@@ -48,7 +48,7 @@ namespace ESignature_ELGAMAL
             this.btnBrowerSigned = new System.Windows.Forms.Button();
             this.btnBrowerUnsign = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
-            this.txtPathSingned = new System.Windows.Forms.TextBox();
+            this.txtPathSignature = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.btnSign = new System.Windows.Forms.Button();
@@ -68,6 +68,7 @@ namespace ESignature_ELGAMAL
             this.openFileDialogToSign = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogToCheck = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             tab1 = new System.Windows.Forms.TabPage();
             tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -77,6 +78,7 @@ namespace ESignature_ELGAMAL
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -112,7 +114,7 @@ namespace ESignature_ELGAMAL
             this.splitContainer1.Panel2.Controls.Add(this.btnBrowerSigned);
             this.splitContainer1.Panel2.Controls.Add(this.btnBrowerUnsign);
             this.splitContainer1.Panel2.Controls.Add(this.btnCheck);
-            this.splitContainer1.Panel2.Controls.Add(this.txtPathSingned);
+            this.splitContainer1.Panel2.Controls.Add(this.txtPathSignature);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.label12);
             this.splitContainer1.Panel2.Controls.Add(this.btnSign);
@@ -262,11 +264,11 @@ namespace ESignature_ELGAMAL
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label14.ForeColor = System.Drawing.Color.Gray;
-            this.label14.Location = new System.Drawing.Point(385, 33);
+            this.label14.Location = new System.Drawing.Point(78, 79);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(131, 20);
+            this.label14.Size = new System.Drawing.Size(202, 20);
             this.label14.TabIndex = 20;
-            this.label14.Text = "Khóa công khai";
+            this.label14.Text = "Khóa công khai: (p, a, d)";
             // 
             // btnBrowerSigned
             // 
@@ -301,16 +303,16 @@ namespace ESignature_ELGAMAL
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
             // 
-            // txtPathSingned
+            // txtPathSignature
             // 
-            this.txtPathSingned.Enabled = false;
-            this.txtPathSingned.Location = new System.Drawing.Point(78, 545);
-            this.txtPathSingned.MaximumSize = new System.Drawing.Size(451, 50);
-            this.txtPathSingned.MinimumSize = new System.Drawing.Size(451, 50);
-            this.txtPathSingned.Multiline = true;
-            this.txtPathSingned.Name = "txtPathSingned";
-            this.txtPathSingned.Size = new System.Drawing.Size(451, 50);
-            this.txtPathSingned.TabIndex = 15;
+            this.txtPathSignature.Enabled = false;
+            this.txtPathSignature.Location = new System.Drawing.Point(78, 545);
+            this.txtPathSignature.MaximumSize = new System.Drawing.Size(451, 50);
+            this.txtPathSignature.MinimumSize = new System.Drawing.Size(451, 50);
+            this.txtPathSignature.Multiline = true;
+            this.txtPathSignature.Name = "txtPathSignature";
+            this.txtPathSignature.Size = new System.Drawing.Size(451, 50);
+            this.txtPathSignature.TabIndex = 15;
             // 
             // label13
             // 
@@ -449,6 +451,7 @@ namespace ESignature_ELGAMAL
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -475,6 +478,14 @@ namespace ESignature_ELGAMAL
             // 
             this.openFileDialogToCheck.FileName = "openFileDialog2";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(68, 66);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(125, 27);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -495,6 +506,8 @@ namespace ESignature_ELGAMAL
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -542,11 +555,12 @@ namespace ESignature_ELGAMAL
         private System.Windows.Forms.OpenFileDialog openFileDialogToSign;
         private System.Windows.Forms.Button btnSign;
         private System.Windows.Forms.Button btnCheck;
-        private System.Windows.Forms.TextBox txtPathSingned;
+        private System.Windows.Forms.TextBox txtPathSignature;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.OpenFileDialog openFileDialogToCheck;
         private System.Windows.Forms.OpenFileDialog openFileDial2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

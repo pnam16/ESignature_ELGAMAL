@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ESignature_ELGAMAL
@@ -12,7 +8,7 @@ namespace ESignature_ELGAMAL
     public partial class Form1 : Form
     {
         public Services services = new Services();
-        ulong p, q, So_G_A, a, x, d, k, y;
+        long p, q, So_G_A, a, x, d, k, y;
         private void BtnBrowerUnsign_Click(object sender, EventArgs e)
         {
             openFileDialogToSign.Filter = "Text Files|*.txt";
@@ -32,12 +28,12 @@ namespace ESignature_ELGAMAL
             }
             try
             {
-                p = (ulong)Int64.Parse(txtP.Text);
-                a = (ulong)Int64.Parse(txtA.Text);
-                d = (ulong)Int64.Parse(txtD.Text);
-                x = (ulong)Int64.Parse(txtX.Text);
-                k = (ulong)Int64.Parse(txtK.Text);
-                y = (ulong)Int64.Parse(txtY.Text);
+                p = (long)Int64.Parse(txtP.Text);
+                a = (long)Int64.Parse(txtA.Text);
+                d = (long)Int64.Parse(txtD.Text);
+                x = (long)Int64.Parse(txtX.Text);
+                k = (long)Int64.Parse(txtK.Text);
+                y = (long)Int64.Parse(txtY.Text);
             }
             catch (FormatException error)
             {
@@ -71,10 +67,7 @@ namespace ESignature_ELGAMAL
                 return;
             }
 
-
             string readFile = File.ReadAllText(openFileDialogToSign.FileName);
-            txtShow.Text = readFile;
-
             String chuky = Sign(readFile);
             txtShow.Text = chuky;
 
@@ -106,75 +99,162 @@ namespace ESignature_ELGAMAL
             if (openFileDialogToCheck.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string fileName = openFileDialogToCheck.FileName;
-                txtPathSingned.Text = fileName;
+                txtPathSignature.Text = fileName;
             }
         }
 
         private void BtnCheck_Click(object sender, EventArgs e)
         {
-
-            if (txtPathSingned.Text == "")
+            if (txtPathUnsign.Text == "")
             {
-                MessageBox.Show("Hãy chọn file để kiểm tra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hãy chọn file cần kiểm tra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (txtShow.Text == "")
+            if (txtPathSignature.Text == "")
             {
-                MessageBox.Show("Chữ ký không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hãy chọn file chữ ký để kiểm tra", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtP.Text == "" || txtA.Text == "" || txtD.Text == "")
+            {
+                MessageBox.Show("Khóa công khai không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (txtY.Text == "" || txtK.Text == "")
+            {
+                MessageBox.Show("k và y không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                p = (long)Int64.Parse(txtP.Text);
+                a = (long)Int64.Parse(txtA.Text);
+                d = (long)Int64.Parse(txtD.Text);
+                k = (long)Int64.Parse(txtK.Text);
+                y = (long)Int64.Parse(txtY.Text);
+            }
+            catch (FormatException error)
+            {
+                MessageBox.Show(error.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!services.KiemtraSNT(p) || a > p || !services.GCDEqual1(k, p - 1) || y != services.LuyThuaModulo(a, k, p))
+            {
+                MessageBox.Show(
+                    "p hoặc a hoặc k chưa hợp lệ. p phải là số nguyên tố, a < p, GCD(k, p-1) = 1, y = a^k mod p",
+                    "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning
+                );
                 return;
             }
 
+            string originalFile = File.ReadAllText(openFileDialogToSign.FileName);
+            string signature = File.ReadAllText(openFileDialogToCheck.FileName);
 
-            string reSignFile = File.ReadAllText(openFileDialogToSign.FileName);
-            string chuKyMoi = Sign(reSignFile);
 
-            //doc file có chữ ký gốc
-            string chuKyGoc = File.ReadAllText(openFileDialogToCheck.FileName);
-
-            if (chuKyMoi == chuKyGoc)
+            if (Verify(signature, originalFile))
             {
                 MessageBox.Show("File vẫn còn nguyên vẹn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }else
+            }
+            else
             {
                 MessageBox.Show("File đã bị chỉnh sửa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 
+
+        private bool Verify(string signature, string content)
+        {
+            // Hash content of original file
+            var contentHashed = services.Hash(content);
+            var list = services.ListHex2Dec(contentHashed);
+            int n = list.Count;
+
+            try
+            {
+                var signatureDecode = System.Convert.FromBase64String(signature);
+                var signatureStr = System.Text.Encoding.UTF8.GetString(signatureDecode);
+                // signatureStr có dạng y-y2
+
+                string[] signature2Arr = signatureStr.Split('-');
+
+                // chuyển y từ string sang long
+                long y = long.Parse(signature2Arr[0]);
+
+                var temp = signature2Arr[1].Split("|");
+
+                for (int i = 0; i < n; i++)
+                {
+                    long y2 = long.Parse(temp[i]);
+
+                    // v1 = d^y * y^y2
+                    long v1 = services.LuyThuaModulo((services.LuyThuaModulo(d, y, p) * services.LuyThuaModulo(y, y2, p)), 1, p);
+
+                    //giá trị của v2 là giá trị được tạo ra từ chữ ký của nội dung đó
+
+                    // v2 = a ^ H(m) mod p
+                    long v2 = services.LuyThuaModulo(a, (long)list[i], p);
+
+                    if (v1 != v2)
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false; ;
+            }
+
+            return true;
+
+        }
+
+
         public string Sign(string ChuoiVao)
         {
-            //danh so ky tu unicode
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(ChuoiVao);
+            //string hashStr = Convert.ToBase64String(plainTextBytes);
+            string hashStr = services.Hash(ChuoiVao);
 
-            string hashStr = Convert.ToBase64String(plainTextBytes);
 
-            int n = hashStr.Length;
-            List<uint> mh_temp2 = new List<uint>();
+
+            // 
+            // chuyển các ký tự đã được hash(đang ở dạng chữ hex) ra mảng số kiểu dữ liệu long
+            List<long> list = services.ListHex2Dec(hashStr);
+            int n = list.Count;
+
+            //tạo mảng để lưu các giá trị đã được mã hoá thông qua công thức y2 =  k^-1 * (H(m) - x * y) mod (p - 1)
+            List<long> listY2 = new List<long>();
+
+            //tính y2= (H(m) - x * y) * k^-1 * mod (p - 1)
+            for (int i = 0; i < n; i++)
+            {
+                var yy2 = services.NghichDaoModulo(k, p - 1);   // k^-1
+                var yyy2 = (list[i] - x * y);              // (H(m) - x * y)
+
+                var y2 = (yy2 * yyy2) % (p - 1);
+                if (y2 < 0)
+                {
+                    y2 += (p - 1);
+                }
+
+                listY2.Add(y2);
+            }
+
+            // lưu lại giá trị mã hoá bao gồm cả y1 và y2
+            String banMaHoa = y + "-";
 
             for (int i = 0; i < n; i++)
             {
-                mh_temp2.Add((uint)hashStr[i]);
+                banMaHoa += listY2[i];
+                if (i != n - 1)
+                    banMaHoa += "|";
             }
 
-            long mh_temp2length = mh_temp2.Count;
-            List<ulong> mh_temp3 = new List<ulong>();
+            var _plainTextBytes = System.Text.Encoding.UTF8.GetBytes(banMaHoa);
 
-            //tính y2 = (x*b^k) mod p
-            for (int i = 0; i < mh_temp2length; i++)
-            {
-                mh_temp3.Add((ulong)((mh_temp2[i] % p) * (services.LuyThuaModulo(d, k, p))) % p);
-            }
-
-            String str = "";
-            long mh_temp3length = mh_temp3.Count;
-            for (int i = 0; i < mh_temp3length; i++)
-            {
-                str += (char)mh_temp3[i];
-            }
-            string banMaHoa;
-            var _plainTextBytes = System.Text.Encoding.UTF8.GetBytes(str);
-            banMaHoa = System.Convert.ToBase64String(_plainTextBytes);
-
-            return banMaHoa;
+            return System.Convert.ToBase64String(_plainTextBytes); ;
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
@@ -190,7 +270,7 @@ namespace ESignature_ELGAMAL
         private void Form1_Load(object sender, EventArgs e) { }
         void Reset()
         {
-            txtP.Text = txtA.Text = txtD.Text = txtX.Text = txtK.Text = txtY.Text = "";
+            txtP.Text = txtA.Text = txtD.Text = txtX.Text = txtK.Text = txtY.Text = txtPathSignature.Text = txtPathUnsign.Text = txtShow.Text = "";
         }
         private void BtnCreateKey_Click(object sender, EventArgs e)
         {
