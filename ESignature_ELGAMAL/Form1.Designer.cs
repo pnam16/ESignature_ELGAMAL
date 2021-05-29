@@ -64,12 +64,12 @@ namespace ESignature_ELGAMAL
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.openFileDialogToSign = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogToCheck = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             tab1 = new System.Windows.Forms.TabPage();
             tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -163,7 +163,7 @@ namespace ESignature_ELGAMAL
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.groupBox2.Location = new System.Drawing.Point(27, 276);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(372, 134);
+            this.groupBox2.Size = new System.Drawing.Size(386, 134);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Khoá bí mật (x)";
@@ -197,7 +197,7 @@ namespace ESignature_ELGAMAL
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.groupBox1.Location = new System.Drawing.Point(27, 73);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(372, 182);
+            this.groupBox1.Size = new System.Drawing.Size(386, 182);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Khoá công khai(p,a,d)";
@@ -462,6 +462,24 @@ namespace ESignature_ELGAMAL
             this.tabPage2.Text = "Thông tin tác giả";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1134, 489);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(85, 20);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "29/05/2021";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1078, 460);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(188, 20);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Được tạo bởi Phương Nam";
+            // 
             // tabPage1
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -479,24 +497,6 @@ namespace ESignature_ELGAMAL
             // openFileDialogToCheck
             // 
             this.openFileDialogToCheck.FileName = "openFileDialog2";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1078, 460);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(188, 20);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Được tạo bởi Phương Nam";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1134, 489);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(85, 20);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "29/05/2021";
             // 
             // Form1
             // 
