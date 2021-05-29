@@ -68,7 +68,8 @@ namespace ESignature_ELGAMAL
             this.openFileDialogToSign = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogToCheck = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             tab1 = new System.Windows.Forms.TabPage();
             tab1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -451,7 +452,8 @@ namespace ESignature_ELGAMAL
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.label16);
+            this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -478,13 +480,23 @@ namespace ESignature_ELGAMAL
             // 
             this.openFileDialogToCheck.FileName = "openFileDialog2";
             // 
-            // textBox1
+            // label15
             // 
-            this.textBox1.Location = new System.Drawing.Point(68, 66);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(1078, 460);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(188, 20);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Được tạo bởi Phương Nam";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1134, 489);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(85, 20);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "29/05/2021";
             // 
             // Form1
             // 
@@ -561,6 +573,7 @@ namespace ESignature_ELGAMAL
         private System.Windows.Forms.OpenFileDialog openFileDial2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }

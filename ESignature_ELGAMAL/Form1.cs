@@ -211,7 +211,6 @@ namespace ESignature_ELGAMAL
 
         }
 
-
         public string Sign(string ChuoiVao)
         {
             //string hashStr = Convert.ToBase64String(plainTextBytes);
