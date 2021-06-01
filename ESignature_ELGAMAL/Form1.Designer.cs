@@ -44,7 +44,6 @@ namespace ESignature_ELGAMAL
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
             this.btnBrowerSigned = new System.Windows.Forms.Button();
             this.btnBrowerUnsign = new System.Windows.Forms.Button();
             this.btnCheck = new System.Windows.Forms.Button();
@@ -111,7 +110,6 @@ namespace ESignature_ELGAMAL
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainer1.Panel2.Controls.Add(this.label14);
             this.splitContainer1.Panel2.Controls.Add(this.btnBrowerSigned);
             this.splitContainer1.Panel2.Controls.Add(this.btnBrowerUnsign);
             this.splitContainer1.Panel2.Controls.Add(this.btnCheck);
@@ -260,17 +258,6 @@ namespace ESignature_ELGAMAL
             this.label1.TabIndex = 0;
             this.label1.Text = "Tạo khoá";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label14.ForeColor = System.Drawing.Color.Gray;
-            this.label14.Location = new System.Drawing.Point(78, 79);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(202, 20);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "Khóa công khai: (p, a, d)";
-            // 
             // btnBrowerSigned
             // 
             this.btnBrowerSigned.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -405,11 +392,11 @@ namespace ESignature_ELGAMAL
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(385, 53);
+            this.label7.Location = new System.Drawing.Point(402, 53);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(173, 20);
+            this.label7.Size = new System.Drawing.Size(159, 20);
             this.label7.TabIndex = 3;
-            this.label7.Text = "y = (a ^ k mod p) y =";
+            this.label7.Text = "y = (a ^ k mod p) =";
             // 
             // txtK
             // 
@@ -568,7 +555,6 @@ namespace ESignature_ELGAMAL
         private System.Windows.Forms.Button btnSign;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.TextBox txtPathSignature;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.OpenFileDialog openFileDialogToCheck;
         private System.Windows.Forms.OpenFileDialog openFileDial2;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
